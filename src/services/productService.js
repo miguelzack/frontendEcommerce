@@ -1,0 +1,27 @@
+import api from "./api";
+
+export async function getProducts(categoryId) {
+  const { data } = await api.get("/produto/view", { params: categoryId ? { categoriaId: categoryId } : {} });
+  return data;
+}
+
+export async function getProductById(id) {
+  const { data } = await api.get(`/produto/view/${id}`);
+  return data;
+}
+
+export async function createProduct(formData) {
+  const { data } = await api.post("/produto/cadastro", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return data;
+}
+
+export async function updateProduct(id, product) {
+  const { data } = await api.put(`/produto/${id}`, product);
+  return data;
+}
+
+export async function deleteProduct(id) {
+  await api.delete(`/produto/delete/${id}`);
+}
