@@ -1,7 +1,9 @@
 import api from "./api";
 
-export async function getCurrentUser() {
-  const { data } = await api.get("/usuario/me");
+export async function getCurrentUser(token) {
+  const { data } = await api.get("/usuario/me", token ? {
+    headers: { Authorization: `Bearer ${token}` },
+  } : undefined);
   return data;
 }
 
